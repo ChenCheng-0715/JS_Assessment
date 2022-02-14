@@ -11,8 +11,8 @@ const row = 10;
 const col = 10;
 
 // set pathCharacter origin index
-let charY = 0;
-let charX = 0;
+let locationY = 0;
+let locationX = 0;
 // set endGame flag
 let endGame = false;
 
@@ -65,7 +65,7 @@ class Field {
         } while (hatY == 0 && hatX == 0);
 
         // set character start position at [0][0]
-        this.field[charY][charX] = pathCharacter;
+        this.field[locationY][locationX] = pathCharacter;
     }
 
 
@@ -78,7 +78,7 @@ class Field {
             this.askQuestion();
             this.checkEndGame();
             if (!endGame) {
-                this.field[charY][charX] = pathCharacter;
+                this.field[locationY][locationX] = pathCharacter;
             }
 
         } while (!endGame);
@@ -100,19 +100,19 @@ class Field {
     
             switch (answer) {
                 case 'U': // move up
-                    charY--;
+                    locationY--;
                     askAgain = false;
                     break;
                 case 'D':// move down
-                    charY++;
+                    locationY++;
                     askAgain = false;
                     break;
                 case 'R':// move right
-                    charX++;
+                    locationX++;
                     askAgain = false;
                     break;
                 case 'L':// move left
-                    charX--;
+                    locationX--;
                     askAgain = false;
                     break;
                 default:
@@ -125,13 +125,13 @@ class Field {
 
 
     checkEndGame() {
-        if (charY < 0 || charY > 9 || charX < 0 || charX > 9) { // pathcharacter move out of boundary lose, end game
+        if (locationY < 0 || locationY > 9 || locationX < 0 || locationX > 9) { // pathcharacter move out of boundary lose, end game
             console.log('Out of bounds - Game End!');
             endGame = true;
-        } else if (this.field[charY][charX].toString() === '^') { // pathcharacter find hat win, end game
+        } else if (this.field[locationY][locationX].toString() === '^') { // pathcharacter find hat win, end game
             console.log('Congrats, you found your hat!');
             endGame = true;
-        } else if (this.field[charY][charX].toString() === 'O') { // path character match hole lose, end game
+        } else if (this.field[locationY][locationX].toString() === 'O') { // path character match hole lose, end game
             console.log('Sorry, you fell down a hole!');
             endGame = true;
         } 
